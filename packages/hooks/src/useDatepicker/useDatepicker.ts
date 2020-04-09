@@ -114,16 +114,18 @@ export function useDatepicker({
       }),
     [hoveredDate, startDate, endDate, minBookingDays, exactMinBookingDays, isDateBlockedProps],
   )
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('keydown', handleKeyDown)
-    }
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  })
+  
+  if (window) {
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        window.addEventListener('keydown', handleKeyDown)
+      }
+  
+      return () => {
+        window.removeEventListener('keydown', handleKeyDown)
+      }
+    })
+  };
 
   function handleKeyDown(e: KeyboardEvent) {
     if (
