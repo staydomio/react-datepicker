@@ -39,6 +39,7 @@ interface AppProps {
   weekdayLabelFormat?(date: Date): string
   monthLabelFormat?(date: Date): string
   onDayRender?(date: Date): React.ReactNode
+  unavailableDates?: Date[]
 }
 
 function App({
@@ -60,6 +61,7 @@ function App({
   weekdayLabelFormat = weekdayLabelFormatFn,
   monthLabelFormat = monthLabelFormatFn,
   onDayRender = undefined,
+  unavailableDates = [],
 }: AppProps) {
   const [state, setState] = useState<OnDatesChangeProps>({
     startDate: null,
@@ -101,6 +103,7 @@ function App({
       weekdayLabelFormat={weekdayLabelFormat}
       monthLabelFormat={monthLabelFormat}
       onDayRender={onDayRender}
+      unavailableDates={unavailableDates}
     />
   )
 }
@@ -196,7 +199,7 @@ storiesOf('Datepicker', module)
       monthLabelFormat={(date: Date) => format(date, 'MMMM yyyy', {locale})}
     />
   ))
-  .add('Block date', () => (
+  .add('Block dates', () => (
     <App
       rtl={boolean('rtl', false)}
       vertical={boolean('vertical', false)}
