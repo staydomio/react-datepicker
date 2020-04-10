@@ -1,4 +1,4 @@
-import {useState, useCallback, useEffect} from 'react'
+import {useState, useCallback} from 'react'
 import isBefore from 'date-fns/isBefore'
 import isAfter from 'date-fns/isAfter'
 import addDays from 'date-fns/addDays'
@@ -115,31 +115,29 @@ export function useDatepicker({
     [hoveredDate, startDate, endDate, minBookingDays, exactMinBookingDays, isDateBlockedProps],
   )
   
-  if (window) {
-    useEffect(() => {
-      if (typeof window !== 'undefined') {
-        window.addEventListener('keydown', handleKeyDown)
-      }
-  
-      return () => {
-        window.removeEventListener('keydown', handleKeyDown)
-      }
-    })
-  };
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     window.addEventListener('keydown', handleKeyDown)
+  //   }
 
-  function handleKeyDown(e: KeyboardEvent) {
-    if (
-      (e.key === 'ArrowRight' ||
-        e.key === 'ArrowLeft' ||
-        e.key === 'ArrowDown' ||
-        e.key === 'ArrowUp') &&
-      !focusedDate
-    ) {
-      const activeMonth = activeMonths[0]
-      onDateFocus(activeMonth.date)
-      setActiveMonths(getInitialMonths(numberOfMonths, activeMonth.date))
-    }
-  }
+  //   return () => {
+  //     window.removeEventListener('keydown', handleKeyDown)
+  //   }
+  // })
+
+  // function handleKeyDown(e: KeyboardEvent) {
+  //   if (
+  //     (e.key === 'ArrowRight' ||
+  //       e.key === 'ArrowLeft' ||
+  //       e.key === 'ArrowDown' ||
+  //       e.key === 'ArrowUp') &&
+  //     !focusedDate
+  //   ) {
+  //     const activeMonth = activeMonths[0]
+  //     onDateFocus(activeMonth.date)
+  //     setActiveMonths(getInitialMonths(numberOfMonths, activeMonth.date))
+  //   }
+  // }
 
   function onResetDates() {
     onDatesChange({
